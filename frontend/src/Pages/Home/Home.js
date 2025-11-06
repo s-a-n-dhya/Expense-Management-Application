@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
-import Header from "../../components/Header";
+import { useEffect, useState } from "react";
+import { Button, Container, Form, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { Button, Modal, Form, Container } from "react-bootstrap";
+import Header from "../../components/Header";
 // import loading from "../../assets/loader.gif";
-import "./home.css";
-import { addTransaction, getTransactions } from "../../utils/ApiRequest";
+
+import BarChartIcon from "@mui/icons-material/BarChart";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import axios from "axios";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "../../components/Spinner";
-import TableData from "./TableData";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import BarChartIcon from "@mui/icons-material/BarChart";
+import { addTransaction, getTransactions } from "../../utils/ApiRequest";
 import Analytics from "./Analytics";
+import "./home.css";
+import TableData from "./TableData";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -401,6 +402,9 @@ const Home = () => {
           </Container>
         </>
       )}
+
+
+
     </>
   );
 };

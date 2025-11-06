@@ -3,10 +3,8 @@ import { loginControllers, registerControllers, setAvatarController } from '../c
 
 const router = express.Router();
 
-router.route("/register").post(registerControllers);
-
-router.route("/login").post(loginControllers);
-
-router.route("/setAvatar/:id").post(setAvatarController);
+router.post("/register", registerControllers);  // ✅ fixed
+router.post("/login", loginControllers);       // simplified
+router.post("/setAvatar/:id", setAvatarController);
 
 export default router;

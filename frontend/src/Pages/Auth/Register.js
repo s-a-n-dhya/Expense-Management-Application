@@ -1,15 +1,15 @@
 // SignupPage.js
-import { useCallback, useEffect, useState } from "react";
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import "./auth.css";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import axios from "axios";
+import { useCallback, useEffect, useState } from "react";
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
 import { registerAPI } from "../../utils/ApiRequest";
-import axios from "axios";
+import "./auth.css";
 
 const Register = () => {
 
@@ -59,7 +59,6 @@ const Register = () => {
       const {name, email, password} = values;
 
       setLoading(false);
-     
       const {data} = await axios.post(registerAPI, {
         name,
         email,
@@ -157,7 +156,7 @@ const Register = () => {
         <h1 className="text-center text-white">Welcome to Expense Management System</h1>
         <Col md={{ span: 6, offset: 3 }}>
           <h2 className="text-white text-center mt-5" >Registration</h2>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicName" className="mt-3" >
               <Form.Label className="text-white">Name</Form.Label>
               <Form.Control type="text"  name="name" placeholder="Full name" value={values.name} onChange={handleChange} />
@@ -177,7 +176,7 @@ const Register = () => {
               <Button
                   type="submit"
                   className=" text-center mt-3 btnStyle"
-                  onClick={!loading ? handleSubmit : null}
+                  //onClick={!loading ? handleSubmit : null}
                   disabled={loading}
                 >
                   {loading ? "Registering..." : "Signup"}

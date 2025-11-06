@@ -1,13 +1,13 @@
 // LoginPage.js
-import { useCallback, useEffect, useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import axios from "axios";
+import { useCallback, useEffect, useState } from "react";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
 import { loginAPI } from "../../utils/ApiRequest";
 
 const Login = () => {
@@ -42,27 +42,29 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  const { email, password } = values;
 
-    const { email, password } = values;
+  setLoading(true);
 
-    setLoading(true);
-
-    const { data } = await axios.post(loginAPI, {
-      email,
-      password,
-    });
+  try {
+    const { data } = await axios.post(loginAPI, { email, password });
 
     if (data.success === true) {
       localStorage.setItem("user", JSON.stringify(data.user));
-      navigate("/");
       toast.success(data.message, toastOptions);
-      setLoading(false);
+      navigate("/");
     } else {
       toast.error(data.message, toastOptions);
-      setLoading(false);
     }
-  };
+  } catch (error) {
+    console.error(error);
+    toast.error("Something went wrong. Please try again.", toastOptions);
+  }
+
+  setLoading(false);
+};
+
 
   const particlesInit = useCallback(async (engine) => {
     // console.log(engine);
